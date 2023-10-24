@@ -28,13 +28,7 @@ CREATE TABLE livro
 (
 	codigo_livro				INT IDENTITY(100001, 100)	NOT NULL,
 	nome					VARCHAR(200)			NOT NULL,
-	lingua					VARCHAR(10)			NOT NULL DEFAULT('PT-BR') CHECK
-													(
-														lingua = 'PT-BR' OR 
-														lingua = 'EN-US' OR 
-														lingua = 'DE-DE' OR 
-														lingua = 'EN-GB'
-													),
+	lingua					VARCHAR(10)			NOT NULL DEFAULT('PT-BR'),
 	ano					INT				NOT NULL CHECK(ano >= 1990)
 	PRIMARY KEY(codigo_livro)
 )
@@ -44,7 +38,13 @@ CREATE TABLE autor
 	id_autor				INT IDENTITY(2351, 1)		NOT NULL,
 	nome					VARCHAR(100)			NOT NULL UNIQUE,
 	data_nasc				DATE				NOT NULL,
-	pais_nasc				VARCHAR(50)			NOT NULL,
+	pais_nasc				VARCHAR(50)			NOT NULL CHECK
+											(
+												pais_nasc = 'Brasil' OR 
+												pais_nasc = 'Estados Unidos' OR 
+												pais_nasc = 'Inglaterra' OR 
+												pais_nasc = 'Alemanha'
+											),
 	biografia				VARCHAR(255)			NOT NULL
 	PRIMARY KEY(id_autor)
 )
